@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON Data Handling</title>
+
+    <style>
+
+        body {
+            font-family: Arial;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+        }
+
+        table, th, td {
+            border: 1px solid black;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: center;
+        }
+
+    </style>
+
+</head>
+<body>
+
+    <h1>JSON Data Handling</h1>
+
+    <table>
+
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Course</th>
+        </tr>
+
+        <tbody id="tableBody"></tbody>
+
+    </table>
+
+    <script>
+
+        let students = [
+            {
+                "id": 1,
+                "name": "Rahul",
+                "course": "BCA"
+            },
+            {
+                "id": 2,
+                "name": "Anjali",
+                "course": "BTech"
+            },
+            {
+                "id": 3,
+                "name": "Amit",
+                "course": "MCA"
+            }
+        ];
+
+        let tableBody = document.getElementById("tableBody");
+
+        students.forEach(function(student) {
+
+            tableBody.innerHTML += `
+                <tr>
+                    <td>${student.id}</td>
+                    <td>${student.name}</td>
+                    <td>${student.course}</td>
+                </tr>
+            `;
+
+        });
+
+    </script>
+
+</body>
+</html>

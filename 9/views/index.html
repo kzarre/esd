@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MVC Application</title>
+
+    <style>
+
+        body {
+            font-family: Arial;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        button {
+            padding: 10px 20px;
+        }
+
+    </style>
+
+</head>
+<body>
+
+    <h1>MVC Architecture Example</h1>
+
+    <button onclick="getUser()">
+        Get User Data
+    </button>
+
+    <h2 id="result"></h2>
+
+    <script>
+
+        function getUser() {
+
+            fetch("/user")
+            .then(response => response.json())
+            .then(data => {
+
+                document.getElementById("result").innerHTML =
+                    data.name + " - " + data.course;
+
+            });
+
+        }
+
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery Practical</title>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <style>
+
+        body {
+            font-family: Arial;
+            text-align: center;
+            margin-top: 50px;
+            background-color: #f4f4f4;
+        }
+
+        #box {
+            width: 200px;
+            height: 200px;
+            background-color: steelblue;
+            margin: auto;
+            margin-top: 30px;
+            border-radius: 10px;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin: 10px;
+        }
+
+    </style>
+
+</head>
+<body>
+
+    <h1>jQuery DOM Manipulation</h1>
+
+    <button id="hideBtn">Hide</button>
+
+    <button id="showBtn">Show</button>
+
+    <button id="colorBtn">Change Color</button>
+
+    <div id="box"></div>
+
+    <script>
+
+        $("#hideBtn").click(function() {
+
+            $("#box").hide();
+
+        });
+
+        $("#showBtn").click(function() {
+
+            $("#box").show();
+
+        });
+
+        $("#colorBtn").click(function() {
+
+            $("#box").css("background-color", "tomato");
+
+        });
+
+    </script>
+
+</body>
+</html>
