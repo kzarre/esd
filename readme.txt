@@ -19,3 +19,6 @@
 19.	Implementation of mobile-first responsive design 
 20.	Implementation of web application deployment on AWS Cloud 
 21.	Implementation of version control using GitHub 
+
+
+use curl https://raw.githubusercontent.com/kzarre/esd/main/[problem_number]/readme.txt
