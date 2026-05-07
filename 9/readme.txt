@@ -8,3 +8,7 @@ models.css
 ├── package.json
 ├── server.js
 └── readme.txt
+
+
+npm install
+npm start
