@@ -1,174 +1,118 @@
-# readme
+
+# README: Angular User Auth Demo
 
 ## Step 1: Install Node.js
 
-Download and install Node.js from:
+Download and install Node.js from the [Official Website](https://nodejs.org).
 
-[Node.js Official Website](https://nodejs.org?utm_source=chatgpt.com)
+After installation, verify it by running these commands in your terminal:
 
-After installation, open terminal and check:
-
-```bash id="z2q8mp"
+```bash
 node -v
 npm -v
-```
 
-If versions are displayed, installation is successful.
+```
 
 ---
 
-# Step 2: Install Angular CLI
+## Step 2: Install Angular CLI
 
-Open terminal or command prompt.
+Open your terminal and install the Angular command-line interface globally:
 
-Run:
-
-```bash id="y4m7rk"
+```bash
 npm install -g @angular/cli
+
 ```
 
-Check installation:
+Verify installation:
 
-```bash id="k8v2tx"
+```bash
 ng version
+
 ```
 
 ---
 
-# Step 3: Create Angular Project
+## Step 3: Create Angular Project
 
-Run:
+Run the following command. **Important:** We use the `--no-standalone` flag to ensure the project uses the `app.module.ts` structure used in this guide.
 
-```bash id="j6n3qp"
-ng new angular-app
+```bash
+ng new angular-app --no-standalone --routing=false --style=css
+
 ```
 
-Angular will ask some questions.
-
-Choose:
-
-```text id="d9x5we"
-Would you like to add Angular routing? -> No
-```
-
-Choose stylesheet format:
-
-```text id="w2q7cv"
-CSS
-```
-
-Wait for project creation to finish.
+* When asked about **SSR (Server Side Rendering)**, type `n` or **No**.
+* Wait for the "Packages installed successfully" message.
 
 ---
 
-# Step 4: Open Project Folder
+## Step 4: Open Project Folder
 
-Run:
+Navigate into your new project:
 
-```bash id="f5r8na"
+```bash
 cd angular-app
+
 ```
 
 ---
 
-# Step 5: Open Project in VS Code
+## Step 5: Open in VS Code
 
 Run:
 
-```bash id="n1k6xm"
+```bash
 code .
+
 ```
 
-If `code` command does not work:
-
-* Open VS Code manually
-* Click File → Open Folder
-* Select angular-app folder
+*If `code` isn't recognized, open VS Code manually and use **File > Open Folder** to select the `angular-app` folder.*
 
 ---
 
-# Step 6: Replace Existing Files
+## Step 6: Prepare Files
 
-Go to folder:
-
-```text id="a7m2pl"
-src/app
-```
-
-You will see files like:
-
-* app.component.html
-* app.component.ts
-* app.component.css
-* app.module.ts
-
-Delete existing code inside these files.
-
-Paste the provided code into corresponding files.
+Navigate to `src/app/` in the VS Code explorer. You will modify the four files listed below. **Delete all existing boilerplate code** in each file before pasting the new code.
 
 ---
 
-# Step 7: app.component.html
+## Step 7: app.component.html
 
-Paste:
+**File:** `src/app/app.component.html`
 
-```html id="c8x4dn"
+```html
 <div class="container">
-
     <h1>Angular User Registration and Login</h1>
 
     <div class="box">
-
         <h2>Register</h2>
-
-        <input type="text"
-               placeholder="Enter Username"
-               [(ngModel)]="registerUsername">
-
-        <input type="password"
-               placeholder="Enter Password"
-               [(ngModel)]="registerPassword">
-
-        <button (click)="registerUser()">
-            Register
-        </button>
-
+        <input type="text" placeholder="Enter Username" [(ngModel)]="registerUsername">
+        <input type="password" placeholder="Enter Password" [(ngModel)]="registerPassword">
+        <button (click)="registerUser()">Register</button>
     </div>
 
     <div class="box">
-
         <h2>Login</h2>
-
-        <input type="text"
-               placeholder="Enter Username"
-               [(ngModel)]="loginUsername">
-
-        <input type="password"
-               placeholder="Enter Password"
-               [(ngModel)]="loginPassword">
-
-        <button (click)="loginUser()">
-            Login
-        </button>
-
+        <input type="text" placeholder="Enter Username" [(ngModel)]="loginUsername">
+        <input type="password" placeholder="Enter Password" [(ngModel)]="loginPassword">
+        <button (click)="loginUser()">Login</button>
     </div>
 
     <div class="box" *ngIf="message">
-
         <h2>{{ message }}</h2>
-
     </div>
-
 </div>
+
 ```
 
 ---
 
-# Step 8: app.component.ts
+## Step 8: app.component.ts
 
-Paste:
+**File:** `src/app/app.component.ts`
 
-```typescript id="v3q9ka"
+```typescript
 import { Component } from '@angular/core';
 
 @Component({
@@ -176,167 +120,113 @@ import { Component } from '@angular/core';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-
 export class AppComponent {
-
-  registerUsername: string = '';
-  registerPassword: string = '';
-
-  loginUsername: string = '';
-  loginPassword: string = '';
-
-  message: string = '';
+  registerUsername = '';
+  registerPassword = '';
+  loginUsername = '';
+  loginPassword = '';
+  message = '';
 
   registerUser() {
-
-    localStorage.setItem(
-      'username',
-      this.registerUsername
-    );
-
-    localStorage.setItem(
-      'password',
-      this.registerPassword
-    );
-
+    localStorage.setItem('username', this.registerUsername);
+    localStorage.setItem('password', this.registerPassword);
     this.message = 'Registration Successful';
-
   }
 
   loginUser() {
+    const savedUser = localStorage.getItem('username');
+    const savedPass = localStorage.getItem('password');
 
-    let username =
-      localStorage.getItem('username');
-
-    let password =
-      localStorage.getItem('password');
-
-    if (
-      this.loginUsername === username &&
-      this.loginPassword === password
-    ) {
-
+    if (this.loginUsername === savedUser && this.loginPassword === savedPass && savedUser !== '') {
       this.message = 'Login Successful';
-
-    }
-
-    else {
-
+    } else {
       this.message = 'Invalid Username or Password';
-
     }
-
   }
-
 }
+
 ```
 
 ---
 
-# Step 9: app.component.css
+## Step 9: app.component.css
 
-Paste:
+**File:** `src/app/app.component.css`
 
-```css id="u7p1mx"
+```css
 .container {
     width: 400px;
-    margin: auto;
-    margin-top: 50px;
-    font-family: Arial;
+    margin: 50px auto;
+    font-family: Arial, sans-serif;
 }
-
 .box {
     background-color: #f4f4f4;
     padding: 20px;
     margin-top: 20px;
     border-radius: 10px;
+    border: 1px solid #ddd;
 }
-
 input {
     width: 100%;
     padding: 10px;
     margin-top: 10px;
+    box-sizing: border-box;
 }
-
 button {
     padding: 10px 20px;
     margin-top: 15px;
+    cursor: pointer;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
 }
+button:hover {
+    background-color: #0056b3;
+}
+
 ```
 
 ---
 
-# Step 10: app.module.ts
+## Step 10: app.module.ts
 
-Paste:
+**File:** `src/app/app.module.ts`
+*This step is crucial to make `[(ngModel)]` work.*
 
-```typescript id="r4v8we"
+```typescript
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
-
 import { AppComponent } from './app.component';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
-
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     FormsModule
   ],
-
   providers: [],
-
   bootstrap: [AppComponent]
-
 })
-
 export class AppModule { }
+
 ```
 
 ---
 
-# Step 11: Run Angular Application
+## Step 11: Run and Test
 
-Open terminal inside project folder.
-
-Run:
-
-```bash id="q8t2la"
+1. In your terminal, run:
+```bash
 ng serve
+
 ```
 
-Wait for compilation.
 
-You will see something like:
+2. Open your browser to `http://localhost:4200`.
+3. **Test:** Register a user first, then try logging in with those same credentials!
 
-```text id="p7x4wm"
-Compiled successfully
 ```
 
----
-
-# Step 12: Open Browser
-
-Open:
-
-```text id="g2m9zn"
-http://localhost:4200
-```
-
----
-
-# Step 13: Test Application
-
-1. Enter username and password in Register section
-2. Click Register
-3. Enter same credentials in Login section
-4. Click Login
-
-You should see:
-
-```text id="m6w3pk"
-Login Successful
 ```
